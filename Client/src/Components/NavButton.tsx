@@ -7,7 +7,7 @@ type NavButtonProps = {
 
 function NavButton({title , route} : NavButtonProps) {
   return (
-    <button className='w-20 bg-white h-8 m-2 rounded-lg'>{title}</button>
+    <button className=' m-2 hover:bg-blue-500 hover:text-white w-24 text-blue-500 border-2 bg-transparent p-2 rounded-l-2xl rounded-r-2xl border-blue-500'>{title}</button>
   )
 }
 
