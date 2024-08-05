@@ -7,7 +7,7 @@ import BookCard from './BookCard';
 function Books() {
   const [query, setQuery] = useState<string>("");
 
-  const fetchBooks = useCallback(() => fetchGoogleBooks(query), [query]);
+  const fetchBooks = useCallback(() =>  fetchGoogleBooks(query), [query]);
 
   const { isLoading, error, data: books }: UseQueryResult<Book[], Error> = useQuery<Book[], Error>({
     queryKey: ['books', query],

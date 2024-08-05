@@ -9,7 +9,7 @@ import axios from "axios"
     thumbnail? : string; 
   }
 
-  async function fetchGoogleBooks(query: string): Promise<Book[]> {
+  export async function fetchGoogleBooks(query: string): Promise<Book[]> {
     try {
         const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
         const books = response.data.items.map((book:any) : Book => ({
@@ -23,6 +23,25 @@ import axios from "axios"
     } catch (error) {
         console.error("Error fetching data from Google Books API", error);
         return [];
+    }
+  }
+
+
+  export async function fetchGoogleBook(id : string): Promise<Book>{
+    try {
+      const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${id}`);
+      const bookData = response.data;
+      const book : Book = {
+        id : bookData.id,
+        title : bookData.volumeInfo.title,
+        authors : bookData.volumeInfo.authors ?? [],
+        description : bookData.volumeInfo.description ?? "No description available",
+        thumbnail : bookData.volumeInfo.imageLinks?.thumbnail ?? ""
+      }
+      return book;
+    } catch (error) {
+      console.error("Error fetching data from Google Books API", error);
+      throw error;
     }
   }
 
